@@ -46,13 +46,14 @@ const signup = async (req, res) => {
     req.user = user;
 
     // Generate JWT token
-    createToken(newUser._id, res);
+    const token = await createToken(newUser._id, res);
 
     return res.status(201).json({
       _id: newUser._id,
       fullName: newUser.fullName,
       email: newUser.email,
       profilePic: newUser.profilePic,
+      token: token,
     });
   } catch (error) {
     console.log("Error in signup controller", error.message);
@@ -90,12 +91,13 @@ const login = async (req, res) => {
 
     req.user = user;
     // Generate JWT Token
-    createToken(user._id, res);
+    const token = await createToken(user._id, res);
     return res.status(200).json({
       _id: user._id,
       fullName: user.fullName,
       email: user.email,
       profilePic: user.profilePic || null,
+      token: token,
     });
   } catch (error) {
     console.log("Error in login controller", error.message);

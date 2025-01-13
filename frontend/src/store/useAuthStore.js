@@ -37,6 +37,9 @@ export const useAuthStore = create((set, get) => ({
       localStorage.setItem("authUser", JSON.stringify(res.data)); // Save to localStorage
       toast.success("Account created successfully");
       get().connectSocket();
+
+      const token = res.data.token;
+      localStorage.setItem("jwt", token);
     } catch (error) {
       toast.error(error?.response?.data?.message || "Signup failed");
     }
@@ -49,6 +52,9 @@ export const useAuthStore = create((set, get) => ({
       localStorage.setItem("authUser", JSON.stringify(res.data)); // Save to localStorage
       toast.success("Logged in successfully");
       get().connectSocket();
+
+      const token = res.data.token; // Assuming the token is returned in the response
+      localStorage.setItem("jwt", token);
     } catch (error) {
       toast.error(error?.response?.data?.message || "Login failed");
       console.log(error);
@@ -61,6 +67,7 @@ export const useAuthStore = create((set, get) => ({
       set({ authUser: null });
       localStorage.removeItem("authUser");
       localStorage.removeItem("receiverUser");
+      localStorage.removeItem("jwt");
       toast.success("Logged out successfully");
       get().disconnectSocket();
     } catch (error) {
