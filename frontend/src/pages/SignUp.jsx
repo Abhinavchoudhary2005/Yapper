@@ -30,10 +30,7 @@ const SignUp = () => {
   };
 
   return (
-    <div
-      style={{ height: "calc(100vh - 4rem)" }}
-      className="flex justify-center items-center"
-    >
+    <div className="flex justify-center items-center h-full">
       <div className="flex flex-col justify-center items-center p-6 sm:p-12">
         <div className="w-full max-w-md space-y-8">
           {/* LOGO */}
