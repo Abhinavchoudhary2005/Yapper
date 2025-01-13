@@ -43,6 +43,8 @@ const signup = async (req, res) => {
 
     await newUser.save();
 
+    req.user = user;
+
     // Generate JWT token
     createToken(newUser._id, res);
 
@@ -86,6 +88,7 @@ const login = async (req, res) => {
       });
     }
 
+    req.user = user;
     // Generate JWT Token
     createToken(user._id, res);
     return res.status(200).json({
