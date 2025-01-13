@@ -34,3 +34,5 @@ app.use("/api/message", messageRoutes);
 server.listen(PORT, () => {
   console.log(`Server started at Port: ${PORT}`);
 });
+
+export default app;
