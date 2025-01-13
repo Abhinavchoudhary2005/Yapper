@@ -114,7 +114,7 @@ export const useAuthStore = create((set, get) => ({
 
     if (!authUser || (socket && socket.connected)) return; // Ensure authUser exists and socket isn't already connected
 
-    const newSocket = io(`${BASE_URL}/socket.io`, {
+    const newSocket = io(BASE_URL, {
       query: {
         userId: authUser._id, // Use the correct authUser reference
       },
