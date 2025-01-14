@@ -13,12 +13,22 @@ const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // useEffect hook to redirect if user is already authenticated
+  useEffect(() => {
+    if (authUser) {
+      navigate("/"); // Navigate to home if user is already logged in
+    }
+  }, [authUser, navigate]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
       await login(formData); // Attempt login
       const authUser = useAuthStore.getState().authUser;
+      if (authUser) {
+        navigate("/"); // Redirect to home if login is successful
+      }
     } catch (error) {
       console.error("Login failed:", error); // Handle login error
     } finally {
